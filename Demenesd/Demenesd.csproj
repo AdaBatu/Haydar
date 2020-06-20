@@ -9,9 +9,14 @@
         }
         
           div {
-              background-color:red;
-              height:400;
-              widh:1000;
+              background-color: red;
+              height: 400;
+              widh: 1000;
+              margin: 40;
+              padding: 70;
+              font-family: Arial, sans-serif;
+              font-weight: bold;
+              font-size: 20;
           }
       </style>
       #bunları yapmak yerine
@@ -51,6 +56,9 @@
         Anan Benim
       Anan Senin
         Bütün Analar Bana Ait
+      </div>
+      <div>
+        ilk Ariel deneyecek eğer browser tanımazsa herhangi bir sans-serif fontu kullanılacak
       </div>
       
       
