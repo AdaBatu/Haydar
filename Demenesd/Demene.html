@@ -51,6 +51,12 @@
             font-size:22px;
             font-weight:900;
         }
+        div3 {
+            width:600px;
+            height:300px;
+            background-color:chocolate;
+            text-align:center;
+        }
     </style>
     #bunlarý yapmak yerine
     <link rel="stylesheet" href="styles.css">
@@ -104,18 +110,24 @@
     <a href="anan.html" style="color:#32c5d9; font-size:19px">Bir kere itsen kendime gelsem</a>
     <h4 id="baba">Babalar burada yawrum</h4>
     <form>
-        <div>
+        <div3>
             <input name="ad" type="text" placeholder="Adýnýz amýný siktiðim"/>
             <input name="þifre" type="password" placeholder="þifreniz amýna koyduðum"/>
-        </div>
-        <div>
-            <h3 style="color:red; text-align:center; font-family:'Courier New';font-weight:bold">Hangi tip yarrak seversin?</h3>
+        </div3>
+        <div3>
+            <a style="color:red; text-align:center; font-family:'Courier New';font-weight:bold">Hangi tip yarrak seversin?</a>
             <input name="yarrak" type="radio" value="uzun"/>Uzun
             <input name="yarrak" type="radio" value="siyah"/>Renkli
             <input name="yarrak"type="radio" value="kalýn"/>Kalýn
-        </div>
+        </div3>
         <div>
-
+            <input name="Hayali yarrak boyu" list="Boyutlar" placeholder="Nedir senin umduðun koca yarraklý hazretler"/>
+            <datalist id="Boyutlar">
+                <option value="5cm">
+                <option value="10cm">
+                <option value="11cm">
+                <option value="Japon oyuncðýndan uzun olsun yeter">
+            </datalist>
         </div>
 
     </form>
