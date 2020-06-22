@@ -1,0 +1,40 @@
+button {
+    background-color: #d4ae1a;
+    font-weight: 700;
+    font-size: 30px;
+    border-color: lightgray;
+    margin: 50px;
+    display: grid;
+    grid-column-gap: 300px;
+    padding: 40px;
+    grid-template-columns: auto;
+    grid-row-gap: 200px;
+    border-bottom-width:13px;
+}
+botton:hover {
+    background-color:darkgoldenrod;
+}
+div1 {
+    position: fixed;
+    right: 20px;
+    top: 10px;
+    height: 1200px;
+    background-color: #d4ae1a;
+    width: 300px;
+    border-collapse: collapse;
+    border-radius: 30px;
+}
+a1 {
+
+}
+body {
+    background-color:lightgray;
+}
+#ing {
+    border-color:red;
+    border-radius:30px;
+    border-width:20px;
+    top:30px;
+    left:40px;
+    border-collapse:collapse;
+}
