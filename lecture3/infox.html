@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+    <Title>Anan</Title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=0.8" />
+</head>
+<body>
+    <div1>
+        <form>
+            <input id="ka" type="text" placeholder="Kullanıcı Adı" />
+            <input id="sifre" type="password" placeholder="Şifre" />
+            <button id="buton" stype="submit"></button>
+        </form>
+    </div1>
+    <h1>{{ anan }}, {{ baban }}</h1>
+    {%if keiz %}
+    <h1>Yarra</h1>
+    {% else %}
+    <h1>barra</h1>
+    {% endif %}
+    <ul>
+        {% for kafan in xcn %}
+        <li>{{ kafan }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('baş') }}">Geri dön aq</a>
+</body>
+</html>

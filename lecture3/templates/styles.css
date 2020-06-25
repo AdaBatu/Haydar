@@ -1,0 +1,13 @@
+body {
+    background-color:#a08585;
+}
+div1 {
+    background-color:antiquewhite;
+    width:30%;
+    height:40%;
+    border-radius:40px;
+    border-color:black;
+    border-width:2px;
+    top:40px;
+    left:70px;
+}
