@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import datetime
 app = Flask(__name__)
 
@@ -15,12 +15,14 @@ def asd():
     keriz = suan.month == 1 and suan.day == 1
     if keriz == True:
         baban = "Bugün yılbaşı"
-        xcn = ["baş", "yarak", "malafat-ül şakşak", "kamış"]
-        return render_template("infox.html", baban=anan, keriz=keriz, xcn=xcn)
+        xcn = ["baş", "yarak", "malafat-ül şflask akşak", "kamış"]
+        return render_template("infox.html", baban=baban, keriz=keriz, xcn=xcn)
     else:
         baban = "Bugün yılbaşı değil"
-        return render_template("infox.html", baban=anan, keriz=keriz)
-@app.route("/baş")
-def baş():
-    return render_template("baş.html")
+        return render_template("infox.html", baban=baban, keriz=keriz)
+@app.route("/baş", methods=["POST]"])
+def poget():
+    kafan = request.form.get("ka")
+    return render_template("baş.html", kafan=kafan)
+
 
