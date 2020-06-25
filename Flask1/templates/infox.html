@@ -7,13 +7,13 @@
 </head>
 <body>
     <div1>
-        <form>
-            <input id="ka" type="text" placeholder="Kullanıcı Adı" />
-            <input id="sifre" type="password" placeholder="Şifre" />
+        <form action="{{ url_for('poget') }}" method="POST">
+            <input name="ka" type="text" placeholder="Kullanıcı Adı" />
+            <input name="sifre" type="password" placeholder="Şifre" />
             <button id="buton" stype="submit"></button>
         </form>
     </div1>
-    <h1>{{ anan }}, {{ baban }}</h1>
+    <h1>{{ baban }}, {{ baban }}</h1>
     {%if keiz %}
     <h1>Yarra</h1>
     {% else %}
