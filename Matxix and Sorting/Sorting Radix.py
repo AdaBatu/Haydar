@@ -3,6 +3,27 @@ liste = []
 sonuc = []
 anan = ""
 dictinor = {}
+
+
+def sortfactor(liste):
+    x0 = []
+    x1 = []
+    x2 = []
+    x3 = []
+    x4 = []
+    x5 = []
+    x6 = []
+    x7 = []
+    x8 = []
+    x9 = []
+    for x in liste:
+        for s in range(len(x)):
+            son = x[-(s + 1)]
+            dictinor[x] = son
+    liste.clear()
+    return print(dictinor)
+
+
 if giriş == "sorting":
     while anan == int or "bitti":
         if anan != "bitti":
@@ -16,16 +37,6 @@ if giriş == "sorting":
     else:
         print("lütfen sayı giriniz")
         liste.remove(anan)
-    for x in liste:
-        for s in range(len(x)):
-            son = x[len(x) - (s + 1)]
-            dictinor[x] = son
-    liste.remove(x)
-    print(dictinor)
+    sortfactor(liste)
 else:
     print("anan")
-
-
-
-
-
