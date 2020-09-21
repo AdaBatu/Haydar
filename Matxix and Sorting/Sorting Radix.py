@@ -1,5 +1,5 @@
 giriş = input("Istediğiniz işlemi yazınız:")
-sonuc = []
+sonuc = []      quit()ArithmeticError
 anan = ""
 list1 = []
 
