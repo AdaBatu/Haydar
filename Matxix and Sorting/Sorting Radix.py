@@ -45,25 +45,44 @@ def Bucket_sorter(liste):
                 liste.pop()
         if x0:
             liste.append(x0)
+            sleep(0.1)
         if x1:
             liste.append(x1)
+            sleep(0.1)
         if x2:
             liste.append(x2)
+            sleep(0.1)
         if x3:
             liste.append(x3)
+            sleep(0.1)
         if x4:
             liste.append(x4)
+            sleep(0.1)
         if x5:
             liste.append(x5)
+            sleep(0.1)
         if x6:
             liste.append(x6)
+            sleep(0.1)
         if x7:
             liste.append(x7)
+            sleep(0.1)
         if x8:
             liste.append(x8)
+            sleep(0.1)
         if x9:
             liste.append(x9)
         bu += 1
+        x0.clear()
+        x1.clear()
+        x2.clear()
+        x3.clear()
+        x4.clear()
+        x5.clear()
+        x6.clear()
+        x7.clear()
+        x8.clear()
+        x9.clear()
     else:
         for x in liste:
             while bu < len(max(liste, key=len)):
@@ -97,22 +116,32 @@ def Bucket_sorter(liste):
                 liste.pop()
         if x0:
             sonucum.append(x0)
+            sleep(0.1)
         if x1:
             sonucum.append(x1)
+            sleep(0.1)
         if x2:
             sonucum.append(x2)
+            sleep(0.1)
         if x3:
             sonucum.append(x3)
+            sleep(0.1)
         if x4:
             sonucum.append(x4)
+            sleep(0.1)
         if x5:
             sonucum.append(x5)
+            sleep(0.1)
         if x6:
             sonucum.append(x6)
+            sleep(0.1)
         if x7:
             sonucum.append(x7)
+            sleep(0.1)
+
         if x8:
             sonucum.append(x8)
+            sleep(0.1)
         if x9:
             sonucum.append(x9)
 
