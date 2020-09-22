@@ -144,7 +144,6 @@ def Bucket_sorter(liste):
             sleep(0.1)
         if x9:
             sonucum.append(x9)
-
     return print(sonucum)
 
 
