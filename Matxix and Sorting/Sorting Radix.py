@@ -1,11 +1,6 @@
-giriş = input("Istediğiniz işlemi yazınız:")
-sonuc = []
-anan = ""
-list1 = []
-
-
-def sortfactor(liste):
+def Bucket_sorter(liste):
     dictinor = {}
+    sonucum = []
     x0 = []
     x1 = []
     x2 = []
@@ -17,7 +12,7 @@ def sortfactor(liste):
     x8 = []
     x9 = []
     bu = 1
-    while bu < (len(max(liste, key=len))):
+    while bu < (len(max(liste, key=len))) - 1:
         for x in liste:
             while bu < len(max(liste, key=len)):
                 son = x[-bu]
@@ -45,9 +40,9 @@ def sortfactor(liste):
                     x8.append(i)
                 if c == 9:
                     x9.append(i)
-                dictinor.clear()
                 break
-            liste.clear()
+                dictinor.clear()
+                liste.pop()
         if x0:
             liste.append(x0)
         if x1:
@@ -69,9 +64,65 @@ def sortfactor(liste):
         if x9:
             liste.append(x9)
         bu += 1
-    return print(liste)
+    else:
+        for x in liste:
+            while bu < len(max(liste, key=len)):
+                son = x[-bu]
+                dictinor[x] = son
+                break
+            for i in dictinor:
+                c = dictinor.get(i)
+                if c == 0:
+                    x0.append(i)
+                if c == 1:
+                    x1.append(i)
+                if c == 2:
+                    x2.append(i)
+                if c == 3:
+                    x3.append(i)
+                if c == 4:
+                    x4.append(i)
+                if c == 5:
+                    x5.append(i)
+                if c == 6:
+                    x6.append(i)
+                if c == 7:
+                    x7.append(i)
+                if c == 8:
+                    x8.append(i)
+                if c == 9:
+                    x9.append(i)
+                break
+                dictinor.clear()
+                liste.pop()
+        if x0:
+            sonucum.append(x0)
+        if x1:
+            sonucum.append(x1)
+        if x2:
+            sonucum.append(x2)
+        if x3:
+            sonucum.append(x3)
+        if x4:
+            sonucum.append(x4)
+        if x5:
+            sonucum.append(x5)
+        if x6:
+            sonucum.append(x6)
+        if x7:
+            sonucum.append(x7)
+        if x8:
+            sonucum.append(x8)
+        if x9:
+            sonucum.append(x9)
+
+    return print(sonucum)
 
 
+giriş = input("Istediğiniz işlemi yazınız:")
+sonuc = []
+anan = ""
+list1 = []
 if giriş == "sorting":
     while anan == int or "bitti":
         if anan != "bitti":
@@ -85,6 +136,6 @@ if giriş == "sorting":
     else:
         print("lütfen sayı giriniz")
         list1.remove(anan)
-    sortfactor(list1)
+    Bucket_sorter(list1)
 else:
     print("anan")
