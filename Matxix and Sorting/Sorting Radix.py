@@ -12,7 +12,7 @@ def Bucket_sorter(liste):
     x8 = []
     x9 = []
     bu = 1
-    while bu < (len(max(liste, key=len))) - 1:
+    while bu + 1 < (len(max(liste, key=len))):
         for x in liste:
             while bu < len(max(liste, key=len)):
                 son = x[-bu]
