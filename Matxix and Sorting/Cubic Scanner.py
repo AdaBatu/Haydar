@@ -1,10 +1,9 @@
-x = ()
-y = ()
-z = ()
+distance1 = ()
+distance2 = ()
 tick_wait = ()
 rotor_speed = ()
 direction = ()
 location = (0, 0, 0)
-def newpunkt(location, x, y, z):
-    neupunkt =
+def newpoint(location, distance1, distance2):
+    neupunkt = distance1
     return print(neupunkt)
