@@ -1,9 +1,17 @@
+import numpy as np
+import matplotlib.pyplot as plt
 distance1 = ()
 distance2 = ()
 tick_wait = ()
 rotor_speed = ()
 direction = ()
 location = (0, 0, 0)
-def newpoint(location, distance1, distance2):
-    neupunkt = distance1
-    return print(neupunkt)
+fig = plt.figure()
+ax = plt.axes(projection='3d')
+zline = np.linspace(0, 15, 1000)
+xline = np.sin(zline)
+yline = np.cos(zline)
+ax.plot3D(xline, yline, zline, 'gray')
+ax.view_init(60, 35)
+fig
+
