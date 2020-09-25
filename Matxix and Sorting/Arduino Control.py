@@ -2,6 +2,7 @@ import pyfirmata
 import time
 from tkinter import *
 import tkinter
+import circuitpython
 
 board = pyfirmata.Arduino('COM3')
 it = pyfirmata.util.Iterator(board)
@@ -13,9 +14,10 @@ liste34 = Listbox(pencere)
 
 def süre(echord):
     time234 = 0
+    trigger_duration
     if echord.read:
+
         while echord.read():
-            time.sleep(0.001)
             time234 += 1
         else:
             return time234
@@ -44,6 +46,6 @@ def summe():
 
 button = Button(pencere, text="start", command=summe)
 button.pack()
-pencere.geometry("640x840+200+200")
+pencere.geometry("640x400+200+200")
 pencere.mainloop()
 
