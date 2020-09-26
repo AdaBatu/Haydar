@@ -3,14 +3,11 @@ import time
 
 ser = serial.Serial('COM3', 9600)
 data = []                       # empty list to store the data
-for i in range(10):
-    b = ser.readline()         # read a byte string
-    string_n = b.decode()  # decode byte string into Unicode
-    string = string_n.rstrip()  # remove \n and \r
-    flt = float(string)        # convert string to float
-    print(flt)
-    data.append(flt)           # add to the end of data list
-    time.sleep(0.001)            # wait (sleep) 0.1 seconds
+while 1:
+    b = ser.readline().decode('ascii')
+    garr = int(''.join(filter(str.isdigit, b)))
+    if int(garr) < 500:
+        print(b)
+    time.sleep(0.001)
 ser.close()
-for line in data:
-    print(line)
+
