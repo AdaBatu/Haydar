@@ -8,6 +8,9 @@ rotor_speed = ()
 direction = ()
 b = ()
 ser = serial.Serial('COM3', 9600)
+X_Grid = [0, 900]
+Y_Grid = [0, 900]
+Z_Grid = [0, 900]
 fig = plt.figure()
 ax = plt.axes(projection='3d')
 ax.set_xlabel('X Axis')
@@ -26,13 +29,13 @@ while 1:
             oma = 0
             garr = 0
         o = math.sqrt((garr ** 2) + (oma ** 2) - (2 * oma * garr * math.cos(12)))
-        
+
         baban = oma
         time.sleep(0.021 + ((1/3)/1000))
 
-    zline = np.linspace(0, 15, 1000)
-    xline = np.sin(zline)
-    yline = np.cos(zline)
+    zline = (0, 15, 1000)
+    xline = (0, 15, 1000)
+    yline = (0, 15, 1000)
     ax.plot3D(xline, yline, zline, 'gray')
     ax.view_init(60, 35)
     plt.show()
