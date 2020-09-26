@@ -2,7 +2,6 @@ import pyfirmata
 import time
 from tkinter import *
 import tkinter
-import circuitpython
 
 board = pyfirmata.Arduino('COM3')
 it = pyfirmata.util.Iterator(board)
@@ -14,10 +13,8 @@ liste34 = Listbox(pencere)
 
 def süre(echord):
     time234 = 0
-    trigger_duration
-    if echord.read:
-
-        while echord.read():
+    if echord.read():
+        while echord.read() == 0:
             time234 += 1
         else:
             return time234
