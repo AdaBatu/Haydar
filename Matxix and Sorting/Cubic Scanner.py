@@ -3,7 +3,7 @@ import time
 import matplotlib.pyplot as plt
 import math
 from sympy import symbols, Eq, solve, sqrt, cos
-import multiprocessing
+from multiprocessing import Process, Queue
 from mpl_toolkits.mplot3d import Axes3D
 old_x = int
 old_y = int
@@ -11,10 +11,12 @@ new_x = int
 new_y = int
 old_dist = int
 new_dist = int
+urban = int
 zline = []
 xline = []
 yline = []
 first_y = 0
+prosseses = []
 ser = serial.Serial('COM3', 9600)
 X_Grid = [0, 900]
 Y_Grid = [0, 900]
@@ -27,10 +29,9 @@ ax.set_zlabel('Z Axis')
 ax.set_title('3D Projection')
 
 
-def multiprocess(r, k, m, old_dist1):
+def multiprocess2(r, k, m, old_dist1):
     o = math.sqrt((r ** 2) + (old_dist1 ** 2) - (2 * old_dist1 * r * cos(12)))
     x, y, k, m, o, r = symbols('x y k m o r')
-    multiprocessing.pool
     eq1 = Eq((sqrt(o ** 2 - x ** 2 + 2 * x * k - k ** 2) + m), y)
     eq2 = Eq((sqrt(r ** 2 - 202500 + 900 * x - x ** 2) + 450), y)
     sncu_dict = solve((eq1, eq2), x, y)
@@ -59,6 +60,13 @@ while 1:
                 zline.append(0)
             else:
                 print(b)
+                p = Process(target=multiprocess2, args=(new_dist, old_x, old_y, old_dist))
+                p.start()
+                prosseses.append(p)
+                urban = p
+                for prosseses in Process:
+                    prosseses.join()
+                    addpoints(p.mu)
         else:
             baban = 1
 
