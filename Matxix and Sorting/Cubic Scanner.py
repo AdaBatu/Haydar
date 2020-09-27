@@ -3,14 +3,20 @@ import time
 import matplotlib.pyplot as plt
 import math
 from sympy import symbols, Eq, solve, sqrt, cos
+from multiprocessing import Process, Queue
 from mpl_toolkits.mplot3d import Axes3D
-k = int
-m = int
-x = int
-y = int
+old_x = int
+old_y = int
+new_x = int
+new_y = int
 old_dist = int
-r = int
+new_dist = int
+urban = int
+zline = []
+xline = []
+yline = []
 first_y = 0
+prosseses = []
 ser = serial.Serial('COM3', 9600)
 X_Grid = [0, 900]
 Y_Grid = [0, 900]
@@ -21,37 +27,52 @@ ax.set_xlabel('X Axis')
 ax.set_ylabel('Y Axis')
 ax.set_zlabel('Z Axis')
 ax.set_title('3D Projection')
+
+
+def multiprocess2(r, k, m, old_dist1):
+    o = math.sqrt((r ** 2) + (old_dist1 ** 2) - (2 * old_dist1 * r * cos(12)))
+    x, y, k, m, o, r = symbols('x y k m o r')
+    eq1 = Eq((sqrt(o ** 2 - x ** 2 + 2 * x * k - k ** 2) + m), y)
+    eq2 = Eq((sqrt(r ** 2 - 202500 + 900 * x - x ** 2) + 450), y)
+    sncu_dict = solve((eq1, eq2), x, y)
+    return sncu_dict
+
+def addpoints(dicto):
+    xlin = dicto[0]
+    ylin = dicto[1]
+    zlin = dicto[2]
+    return xline.append(xlin), yline.append(ylin), zline.append(zlin)
+
+
 while 1:
     baban = 1
-    for h in range(313):
+    starttime = time.time()
+    for h in range(360):
         b = ser.readline().decode('ascii')
-        r = int(''.join(filter(str.isdigit, b)))
-        if r < 500:
+        new_dist = int(''.join(filter(str.isdigit, b)))
+        if new_dist < 500:
             if baban:
-                k = r
-                old_dist = r
+                old_x = new_dist
+                old_dist = new_dist
                 baban = 0
+                xline.append(new_dist)
+                yline.append(first_y)
+                zline.append(0)
             else:
                 print(b)
-                o = math.sqrt((r ** 2) + (old_dist ** 2) - (2 * old_dist * r * cos(12)))
-                x, y, k, m, o, r = symbols('x y k m o r')
-                eq1 = Eq((sqrt(o**2 - m**2 + 2*m*y - y**2 + k - x)), 0)
-                eq2 = Eq((sqrt(r**2 - 202500 + 900*x - x**2 + 450)), x)
-                sncu_dict = solve((eq1, eq2), x, y, dict=True)
-                print(sncu_dict)
-                print(x, y)
-                k, m = x, y
-                old_dist = r
-                break
+                p = Process(target=multiprocess2, args=(new_dist, old_x, old_y, old_dist))
+                p.start()
+                prosseses.append(p)
+                urban = p
+                for prosseses in Process:
+                    prosseses.join()
+                    addpoints(p.mu)
         else:
             baban = 1
 
         time.sleep(0.021 + ((1/3)/1000))
-
-    zline = (0, 15, 1000)
-    xline = (0, 15, 1000)
-    yline = (0, 15, 1000)
-    ax.plot3D(xline, yline, zline, 'gray')
+    print('That took {} seconds'.format(time.time() - starttime))
+    ax.scatter(xline, yline, zline, 'gray')
     ax.view_init(60, 35)
     plt.show()
-    ser.close()
+ser.close()
