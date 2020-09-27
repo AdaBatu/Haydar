@@ -2,14 +2,14 @@ import serial
 import time
 import matplotlib.pyplot as plt
 import math
-from sympy import symbols, Eq, solve, sqrt
+from sympy import symbols, Eq, solve, sqrt, cos
 from mpl_toolkits.mplot3d import Axes3D
 k = int
 m = int
 x = int
 y = int
 old_dist = int
-new_dist = int
+r = int
 first_y = 0
 ser = serial.Serial('COM3', 9600)
 X_Grid = [0, 900]
@@ -25,26 +25,23 @@ while 1:
     baban = 1
     for h in range(313):
         b = ser.readline().decode('ascii')
-        new_dist = int(''.join(filter(str.isdigit, b)))
-        if new_dist < 500:
+        r = int(''.join(filter(str.isdigit, b)))
+        if r < 500:
             if baban:
-                k = new_dist
-                old_dist = new_dist
+                k = r
+                old_dist = r
                 baban = 0
             else:
                 print(b)
-                o = math.sqrt((new_dist ** 2) + (old_dist ** 2) - (2 * old_dist * new_dist * math.cos(12)))
-                x, y = symbols('x y')
-                k, m, o = symbols('k m o')
-                eq1 = Eq((sqrt(o**2 - m**2 + 2*m*y - y**2 + k - x)), 0)
-                eq2 = Eq((sqrt(o**2 - x**2 + 2*x*k - k**2 + m - y)), 0)
-                sncu_dict = solve((eq1, eq2), dict=True)
-                x = sncu_dict[x]
-                y = sncu_dict[y]
+                o = math.sqrt((r ** 2) + (old_dist ** 2) - (2 * old_dist * r * cos(12)))
+                x, y, k, m, o, r = symbols('x y k m o r')
+                eq1 = Eq((sqrt(o**2 - x**2 + 2*x*k - k**2) + m), y)
+                eq2 = Eq((sqrt(r**2 - 202500 + 900*x - x**2) + 450), y)
+                sncu_dict = solve((eq1, eq2), x, y)
+                print(sncu_dict)
                 print(x, y)
-
                 k, m = x, y
-                old_dist = new_dist
+                old_dist = r
         else:
             baban = 1
 
