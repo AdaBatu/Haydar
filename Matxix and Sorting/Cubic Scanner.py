@@ -11,12 +11,10 @@ new_x = int
 new_y = int
 old_dist = int
 new_dist = int
-urban = int
 zline = []
 xline = []
 yline = []
 first_y = 0
-prosseses = []
 ser = serial.Serial('COM3', 9600)
 X_Grid = [0, 900]
 Y_Grid = [0, 900]
@@ -60,13 +58,10 @@ while 1:
                 zline.append(0)
             else:
                 print(b)
-                p = Process(target=multiprocess2, args=(new_dist, old_x, old_y, old_dist))
-                p.start()
-                prosseses.append(p)
-                urban = p
-                for prosseses in Process:
-                    prosseses.join()
-                    addpoints(p.mu)
+                dis_dict = multiprocess2(new_dist, old_x, old_y, old_dist)
+                addpoints(dis_dict)
+                old_x = dis_dict[0]
+                old_y = dis_dict[1]
         else:
             baban = 1
 
