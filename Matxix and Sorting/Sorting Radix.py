@@ -17,7 +17,6 @@ def Bucket_sorter(liste):
             while bu < len(max(liste, key=len)):
                 son = x[-bu]
                 dictinor[x] = son
-                break
             for i in dictinor:
                 c = dictinor.get(i)
                 if c == 0:
@@ -88,7 +87,6 @@ def Bucket_sorter(liste):
             while bu < len(max(liste, key=len)):
                 son = x[-bu]
                 dictinor[x] = son
-                break
             for i in dictinor:
                 c = dictinor.get(i)
                 if c == 0:
