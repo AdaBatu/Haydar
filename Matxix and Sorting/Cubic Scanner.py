@@ -2,11 +2,12 @@ import serial
 import time
 import matplotlib.pyplot as plt
 import math
+from sympy import symbols, Eq, solve, sqrt
 from mpl_toolkits.mplot3d import Axes3D
-old_x = int
-old_y = int
-new_x = int
-new_y = int
+k = int
+m = int
+x = int
+y = int
 old_dist = int
 new_dist = int
 first_y = 0
@@ -27,16 +28,23 @@ while 1:
         new_dist = int(''.join(filter(str.isdigit, b)))
         if new_dist < 500:
             if baban:
-                old_x = new_dist
+                k = new_dist
                 old_dist = new_dist
                 baban = 0
             else:
                 print(b)
                 o = math.sqrt((new_dist ** 2) + (old_dist ** 2) - (2 * old_dist * new_dist * math.cos(12)))
-                old_dist = new_dist
-                new_x, new_y = math.sqrt(o ** 2 - old_y ** 2 + 2 * old_y * new_y - new_y ** 2) + old_x, math.sqrt(o ** 2 - new_x ** 2 + 2 * new_x * old_x - old_x ** 2) + old_y
+                x, y = symbols('x y')
+                k, m, o = symbols('k m o')
+                eq1 = Eq((sqrt(o**2 - m**2 + 2*m*y - y**2 + k - x)), 0)
+                eq2 = Eq((sqrt(o**2 - x**2 + 2*x*k - k**2 + m - y)), 0)
+                sncu_dict = solve((eq1, eq2), dict=True)
+                x = sncu_dict[x]
+                y = sncu_dict[y]
+                print(x, y)
 
-                old_x, old_y = new_x, new_y
+                k, m = x, y
+                old_dist = new_dist
         else:
             baban = 1
 
