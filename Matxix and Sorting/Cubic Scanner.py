@@ -18,14 +18,14 @@ yline = []
 first_y = 0
 prosseses = []
 ser = serial.Serial('COM3', 9600)
-X_Grid = [0, 900]
-Y_Grid = [0, 900]
-Z_Grid = [0, 900]
 fig = plt.figure()
 ax = plt.axes(projection='3d')
 ax.set_xlabel('X Axis')
 ax.set_ylabel('Y Axis')
 ax.set_zlabel('Z Axis')
+X_Grid = [0, 900]
+Y_Grid = [0, 900]
+Z_Grid = [0, 900]
 ax.set_title('3D Projection')
 
 
@@ -72,7 +72,7 @@ while 1:
 
         time.sleep(0.021 + ((1/3)/1000))
     print('That took {} seconds'.format(time.time() - starttime))
-    ax.scatter(xline, yline, zline, 'gray')
+    ax.scatter(xline, yline, zline, 'gray', cmap='brg')
     ax.view_init(60, 35)
     plt.show()
 ser.close()
