@@ -1,6 +1,8 @@
 import serial
 import time
 import matplotlib.pyplot as plt
+import matplotlib.cm as cm
+import matplotlib as mpl
 import math
 from sympy import symbols, Eq, solve, sqrt, cos
 from multiprocessing import Process, Queue
@@ -17,6 +19,7 @@ multiplyer2 = int
 zline = []
 xline = []
 yline = []
+colores = []
 first_y = 0
 new_z = 450
 ser = serial.Serial('COM3', 9600)
@@ -40,11 +43,14 @@ def multiprocess2(r, k, m, old_dist1, mult1, multi2):
     sncu_dict = [x, y, z]
     return sncu_dict
 
-def addpoints(dicto):
+def addpoints(dicto, dist):
     xlin = dicto[0]
     ylin = dicto[1]
     zlin = dicto[2]
-    return xline.append(xlin), yline.append(ylin), zline.append(zlin)
+    norm = mpl.colors.Normalize(vmin=3, vmax=450)
+    cmap = cm.brg
+    m = cm.ScalarMappable(norm=norm, cmap=cmap)
+    return xline.append(xlin), yline.append(ylin), zline.append(zlin), colores.append(m.to_rgba(dist))
 
 
 while 1:
@@ -91,7 +97,7 @@ while 1:
                     new_x = 0
                     new_y = -new_dist
                     dis_dict = [new_x, new_y, new_z]
-                addpoints(dis_dict)
+                addpoints(dis_dict, new_dist)
                 old_x = dis_dict[0]
                 old_y = dis_dict[1]
                 dis_dict = []
@@ -100,7 +106,8 @@ while 1:
         phase += ilerleyis
         time.sleep(0.021 + ((1/3)/1000))
     print('That took {} seconds'.format(time.time() - starttime))
-    ax.scatter(xline, yline, zline, 'gray', cmap='brg')
+
+    ax.scatter(xline, yline, zline, color=colores)
     ax.view_init(60, 35)
     plt.show()
 ser.close()
