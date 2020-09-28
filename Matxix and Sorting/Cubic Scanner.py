@@ -29,10 +29,10 @@ ax.set_title('3D Projection')
 
 def multiprocess2(r, k, m, old_dist1):
     o = math.sqrt((r ** 2) + (old_dist1 ** 2) - (2 * old_dist1 * r * cos(12)))
-    x, y, k, m, o, r = symbols('x y k m o r')
-    eq1 = Eq((sqrt(o ** 2 - x ** 2 + 2 * x * k - k ** 2) + m), y)
-    eq2 = Eq((sqrt(r ** 2 - 202500 + 900 * x - x ** 2) + 450), y)
-    sncu_dict = solve((eq1, eq2), x, y)
+    x = (r ** 2 - o ** 2 - m ** 2 + k ** 2) / (2 * k - 900)
+    y = math.sqrt(o ** 2 - x ** 2 + 2 * x * k - k ** 2 + m ** 2)
+    z = 450
+    sncu_dict = [x, y, z]
     return sncu_dict
 
 def addpoints(dicto):
@@ -50,7 +50,8 @@ while 1:
         new_dist = int(''.join(filter(str.isdigit, b)))
         if new_dist < 500:
             if baban:
-                old_x = new_dist
+                old_x = (450 + new_dist)
+                old_y = 450
                 old_dist = new_dist
                 baban = 0
                 xline.append(new_dist)
@@ -67,7 +68,7 @@ while 1:
 
         time.sleep(0.021 + ((1/3)/1000))
     print('That took {} seconds'.format(time.time() - starttime))
-    ax.scatter(xline, yline, zline, 'gray')
+    ax.scatter(xline, yline, zline, 'gray', cmap='brg')
     ax.view_init(60, 35)
     plt.show()
 ser.close()
