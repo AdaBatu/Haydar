@@ -23,7 +23,7 @@ new_z = 450
 ser = serial.Serial('COM3', 9600)
 X_Grid = [0, 900]
 Y_Grid = [0, 900]
-Z_Grid = [0, 900]
+Z_Grid = [0, 000]
 phase = 0
 fig = plt.figure()
 ax = plt.axes(projection='3d')
@@ -62,8 +62,8 @@ while 1:
         new_dist = int(''.join(filter(str.isdigit, b)))
         if new_dist < 500:
             if baban:
-                old_x = (450 + new_dist)
-                old_y = 450
+                old_x = (450 + new_dist/)
+                old_y = 0
                 old_dist = new_dist
                 baban = 0
                 xline.append(new_dist)
