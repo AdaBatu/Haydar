@@ -41,16 +41,16 @@ def multiprocess2(r, k, m, old_dist1, multi1, multi2):
     sncu_dict = [x, y, z]
     return sncu_dict
 
+
 def addpoints(dicto, dist):
     xlin = dicto[0]
     ylin = dicto[1]
     zlin = dicto[2]
     bole = dist / 450
+    cmap = cm.get_cmap('brg')
     norm = mpl.colors.Normalize(vmin=0, vmax=1)
-    cmap = cm.get_cmap(cm.brg)
     rgb = cmap(norm(abs(bole)))[:3]
-    color = mpl.colors.rgb2hex(rgb)
-    return xline.append(xlin), yline.append(ylin), zline.append(zlin), colores.append(color)
+    return xline.append(xlin), yline.append(ylin), zline.append(zlin), colores.append(mpl.colors.rgb2hex(rgb))
 
 
 while 1:
@@ -86,7 +86,7 @@ while 1:
                         multiplyer1 = 1
                         multiplyer2 = -1
                     dis_dict = multiprocess2(new_dist, old_x, old_y, old_dist, multiplyer1, multiplyer2)
-                    print(new_dist, old_x, old_y, old_dist, dis_dict)
+                    print(new_dist, old_x, old_y, old_dist, dis_dict, colores)
                 else:
                     if phase == 90:
                         new_x = 450
@@ -111,7 +111,7 @@ while 1:
         time.sleep(0.021 + ((1/3)/1000))
     print('That took {} seconds'.format(time.time() - starttime))
 
-    ax.scatter(xline, yline, zline, color=colores)
+    ax.scatter(xline, yline, zline, color=colores, cmap='brg')
     ax.view_init(60, 35)
     plt.show()
 ser.close()
