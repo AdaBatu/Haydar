@@ -1,10 +1,10 @@
 import serial
 import time
 import matplotlib.pyplot as plt
-import matplotlib.cm as cm
-import matplotlib as mpl
-import math
 from mpl_toolkits.mplot3d import Axes3D
+import numpy as np
+import math
+
 old_x = 0
 old_y = 0
 new_x = 0
@@ -17,7 +17,6 @@ multiplyer2 = 0
 zline = []
 xline = []
 yline = []
-colores = []
 first_y = 450
 new_z = 450
 ser = serial.Serial('COM3', 9600)
@@ -42,24 +41,23 @@ def multiprocess2(r, k, m, old_dist1, multi1, multi2):
     return sncu_dict
 
 
-def addpoints(dicto, dist):
+def addpoints(dicto):
     xlin = dicto[0]
     ylin = dicto[1]
     zlin = dicto[2]
-    bole = dist / 450
-    cmap = cm.get_cmap('brg')
-    norm = mpl.colors.Normalize(vmin=0, vmax=1)
-    rgb = cmap(norm(abs(bole)))[:3]
-    return xline.append(xlin), yline.append(ylin), zline.append(zlin), colores.append(mpl.colors.rgb2hex(rgb))
+    return xline.append(xlin), yline.append(ylin), zline.append(zlin)
 
 
 while 1:
     baban = 1
     starttime = time.time()
-    for h in range(4):
+    for h in range(5):
         if phase > 348:
             phase -= 360
-        b = ser.readline().decode('ascii')
+        try:
+            b = ser.readline().decode('ascii')
+        except:
+            b = ser.readline().decode('ascii')
         new_dist = int(''.join(filter(str.isdigit, b)))
         if new_dist < 500:
             if baban:
@@ -86,7 +84,7 @@ while 1:
                         multiplyer1 = 1
                         multiplyer2 = -1
                     dis_dict = multiprocess2(new_dist, old_x, old_y, old_dist, multiplyer1, multiplyer2)
-                    print(new_dist, old_x, old_y, old_dist, dis_dict, colores)
+                    print(new_dist, old_x, old_y, old_dist, dis_dict)
                 else:
                     if phase == 90:
                         new_x = 450
@@ -100,7 +98,7 @@ while 1:
                         new_x = 450
                         new_y = -new_dist + 450
                         dis_dict = [new_x, new_y, new_z]
-                addpoints(dis_dict, new_dist)
+                addpoints(dis_dict)
                 old_x = dis_dict[0]
                 old_y = dis_dict[1]
                 old_dist = new_dist
@@ -108,10 +106,15 @@ while 1:
         else:
             baban = 1
         phase += ilerleyis
-        time.sleep(0.021 + ((1/3)/1000))
+        time.sleep(0.021 + ((1 / 3) / 1000))
     print('That took {} seconds'.format(time.time() - starttime))
+    a, b = len(np.unique(xline)), len(np.unique(yline))
 
-    ax.scatter(xline, yline, zline, color=colores, cmap='brg')
+    X = xline.reshape(a, b).T
+    Y = yline.reshape(a, b).T
+    Z = zline.reshape(a, b).T
+    ax.scatter(xline, yline, zline, c=np.linalg.norm([xline, yline, zline], axis=0))
+    ax.plot_wireframe(X, Y, Z)
     ax.view_init(60, 35)
     plt.show()
 ser.close()
