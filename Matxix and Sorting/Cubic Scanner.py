@@ -108,13 +108,8 @@ while 1:
         phase += ilerleyis
         time.sleep(0.021 + ((1 / 3) / 1000))
     print('That took {} seconds'.format(time.time() - starttime))
-    a, b = len(np.unique(xline)), len(np.unique(yline))
-
-    X = xline.reshape(a, b).T
-    Y = yline.reshape(a, b).T
-    Z = zline.reshape(a, b).T
     ax.scatter(xline, yline, zline, c=np.linalg.norm([xline, yline, zline], axis=0))
-    ax.plot_wireframe(X, Y, Z)
+    ax.plot_trisurf(np.array(xline), np.array(yline), np.array(zline))
     ax.view_init(60, 35)
     plt.show()
 ser.close()
