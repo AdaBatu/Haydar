@@ -12,4 +12,4 @@ for x in range(len(sifre)):
             listem.append(i)
             break
 print(listem)
-print((310 ** 2 - 166.74122584551102 ** 2 - 250 ** 2 + 310 ** 2) / (2 * 310 - 900))
+print((310 ** 2 - 166.741 ** 2 - 250 ** 2 + 475 ** 2) / (2 * 475 - 900))
