@@ -51,7 +51,7 @@ def addpoints(dicto):
 while 1:
     baban = 1
     starttime = time.time()
-    for h in range(5):
+    for h in range(360):
         if phase > 348:
             phase -= 360
         try:
@@ -70,7 +70,7 @@ while 1:
                 zline.append(new_z)
             else:
                 print(b)
-                if phase != 90 or 180 or 270:
+                if phase != 90 or 180 or 270 or 0:
                     if phase < 90:
                         multiplyer1 = 1
                         multiplyer2 = 1
@@ -91,12 +91,15 @@ while 1:
                         new_y = new_dist + 450
                         dis_dict = [new_x, new_y, new_z]
                     if phase == 180:
+                        new_x = 450 - new_dist
                         new_y = 450
-                        new_x = new_dist + 450
                         dis_dict = [new_x, new_y, new_z]
                     if phase == 270:
                         new_x = 450
                         new_y = -new_dist + 450
+                    if phase == 0:
+                        new_x = new_dist + 450
+                        new_y = 450
                         dis_dict = [new_x, new_y, new_z]
                 addpoints(dis_dict)
                 old_x = dis_dict[0]
