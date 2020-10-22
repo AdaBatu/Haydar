@@ -23,7 +23,7 @@ ax.set_title('3D Projection')
 
 def sayılr(neulist):
     ser = serial.Serial(port="COM3", baudrate=9600)
-    for p in range(72 * 3):
+    for p in range(72 * 8):
         b = ser.readline().decode('ascii')
         newest_dist = int(''.join(filter(str.isdigit, b)))
         time.sleep(0.0042)
@@ -54,14 +54,7 @@ def multiprocess2(r, k, m, n, old_dist1, multi1, multi2, ileri, faz):
     return sncu_dict
 
 
-def addpoints(dicto):
-    xlin = dicto[0]
-    ylin = dicto[1]
-    zlin = dicto[2]
-    return xline.append(xlin), yline.append(ylin), zline.append(zlin)
-
-
-def main1(ooora, colist1):
+def main1(ooora, cx, cy, cz):
     anan = 0
     old_x = int
     old_y = 0
@@ -78,8 +71,8 @@ def main1(ooora, colist1):
     phase = 0
     up_phase = 0
     baban = 1
-    for ko in range(3):
-        starttime = time.time()
+    starttime = time.time()
+    for ko in range(8):
         for h in range(72):
             if phase > 348:
                 phase -= 360
@@ -99,7 +92,10 @@ def main1(ooora, colist1):
                     old_y = new_y
                     old_dist = new_dist
                     bakko = [new_x, new_y, new_z]
-                    addpoints(bakko)
+                    xlin = bakko[0]
+                    ylin = bakko[1]
+                    zlin = bakko[2]
+                    cx.append(xlin), cy.append(ylin), cz.append(zlin)
                     baban = 0
                 else:
                     if baban:
@@ -145,8 +141,10 @@ def main1(ooora, colist1):
                                 new_y = 450
                                 new_z = 450 + abs((math.sin(math.radians(up_phase)) * new_dist))
                             dis_dict = [new_x, new_y, new_z]
-                        addpoints(dis_dict)
-                        colist1 = dis_dict
+                        xlin = dis_dict[0]
+                        ylin = dis_dict[1]
+                        zlin = dis_dict[2]
+                        cx.append(xlin), cy.append(ylin), cz.append(zlin)
                         old_dist = new_dist
                         dis_dict.clear()
             else:
@@ -161,17 +159,18 @@ def main1(ooora, colist1):
 if __name__ == '__main__':
     with Manager() as manager:
         neulist = Manager().list()
-        colist = Manager().list()
+        cxlist = Manager().list()
+        cylist = Manager().list()
+        czlist = Manager().list()
         p1 = Process(target=sayılr, args=(neulist, ))
-        p2 = Process(target=main1, args=(neulist, colist))
-        p3 = Process(target=multiprocess2, args=(colist, ))
+        p2 = Process(target=main1, args=(neulist, cxlist, cylist, czlist))
         p1.start()
         time.sleep(5)
         p2.start()
     while p1.is_alive() or p2.is_alive():
         time.sleep(5)
     else:
-        ax.scatter(xline, yline, zline, c=np.linalg.norm([xline, yline, zline], axis=0))
-        ax.plot_trisurf(np.array(xline), np.array(yline), np.array(zline))
+        ax.scatter(cxlist, cylist, czlist, c=np.linalg.norm([cxlist, cylist, czlist], axis=0))
+        ax.plot_trisurf(np.array(cxlist), np.array(cylist), np.array(czlist))
         ax.view_init(60, 35)
         plt.show()
