@@ -2,16 +2,14 @@ import serial
 import time
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
-from multiprocessing import Process
-from threading import Thread
+from multiprocessing import Process, Manager
+import threading
 import numpy as np
 import math
 
-neulist = []
 zline = []
 xline = []
 yline = []
-ser = serial.Serial(port="COM3", baudrate=9600)
 fig = plt.figure()
 X_Grid = [0, 900]
 Y_Grid = [0, 900]
@@ -23,12 +21,14 @@ ax.set_zlabel('Z Axis')
 ax.set_title('3D Projection')
 
 
-def sayılr(seri):
-    for p in range(72 * 8):
-        b = seri.readline().decode('ascii')
+def sayılr(neulist):
+    ser = serial.Serial(port="COM3", baudrate=9600)
+    for p in range(72 * 3):
+        b = ser.readline().decode('ascii')
         newest_dist = int(''.join(filter(str.isdigit, b)))
         time.sleep(0.0042)
-        return neulist.append(newest_dist), print(b)
+        neulist.append(newest_dist), print(b)
+    ser.close()
 
 
 def multiprocess2(r, k, m, n, old_dist1, multi1, multi2, ileri, faz):
@@ -61,7 +61,7 @@ def addpoints(dicto):
     return xline.append(xlin), yline.append(ylin), zline.append(zlin)
 
 
-def main1(ooora):
+def main1(ooora, colist1):
     anan = 0
     old_x = int
     old_y = 0
@@ -83,7 +83,11 @@ def main1(ooora):
         for h in range(72):
             if phase > 348:
                 phase -= 360
-            new_dist = int(ooora[0])
+            try:
+                new_dist = int(ooora[0])
+            except IndexError:
+                time.sleep(1)
+                new_dist = int(ooora[0])
             del ooora[0]
             if new_dist < 500:
                 if anan:
@@ -142,6 +146,7 @@ def main1(ooora):
                                 new_z = 450 + abs((math.sin(math.radians(up_phase)) * new_dist))
                             dis_dict = [new_x, new_y, new_z]
                         addpoints(dis_dict)
+                        colist1 = dis_dict
                         old_dist = new_dist
                         dis_dict.clear()
             else:
@@ -154,15 +159,19 @@ def main1(ooora):
 
 
 if __name__ == '__main__':
-    p1 = Thread(target=sayılr, args=(ser,))
-    p2 = Process(target=main1, args=(neulist,))
-    p1.start()
-    time.sleep(1)
-    p2.start()
-    p1.join()
-    p2.join()
-ax.scatter(xline, yline, zline, c=np.linalg.norm([xline, yline, zline], axis=0))
-ax.plot_trisurf(np.array(xline), np.array(yline), np.array(zline))
-ax.view_init(60, 35)
-plt.show()
-ser.close()
+    with Manager() as manager:
+        neulist = Manager().list()
+        colist = Manager().list()
+        p1 = Process(target=sayılr, args=(neulist, ))
+        p2 = Process(target=main1, args=(neulist, colist))
+        p3 = Process(target=multiprocess2, args=(colist, ))
+        p1.start()
+        time.sleep(5)
+        p2.start()
+    while p1.is_alive() or p2.is_alive():
+        time.sleep(5)
+    else:
+        ax.scatter(xline, yline, zline, c=np.linalg.norm([xline, yline, zline], axis=0))
+        ax.plot_trisurf(np.array(xline), np.array(yline), np.array(zline))
+        ax.view_init(60, 35)
+        plt.show()
