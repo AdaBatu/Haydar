@@ -3,7 +3,6 @@ import time
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from multiprocessing import Process, Manager
-import threading
 import numpy as np
 import math
 
@@ -19,14 +18,15 @@ ax.set_xlabel('X Axis')
 ax.set_ylabel('Y Axis')
 ax.set_zlabel('Z Axis')
 ax.set_title('3D Projection')
+file = open("copy.txt", "w")
 
 
 def sayılr(neulist):
     ser = serial.Serial(port="COM3", baudrate=9600)
-    for p in range(72 * 8):
+    for p in range(72 * 3):
         b = ser.readline().decode('ascii')
         newest_dist = int(''.join(filter(str.isdigit, b)))
-        time.sleep(0.0042)
+        time.sleep(0.068012)
         neulist.append(newest_dist), print(b)
     ser.close()
 
@@ -54,7 +54,7 @@ def multiprocess2(r, k, m, n, old_dist1, multi1, multi2, ileri, faz):
     return sncu_dict
 
 
-def main1(ooora, cx, cy, cz):
+def main1(ooora, cx, cy, cz, ccc):
     anan = 0
     old_x = int
     old_y = 0
@@ -72,7 +72,7 @@ def main1(ooora, cx, cy, cz):
     up_phase = 0
     baban = 1
     starttime = time.time()
-    for ko in range(8):
+    for ko in range(3):
         for h in range(72):
             if phase > 348:
                 phase -= 360
@@ -96,6 +96,8 @@ def main1(ooora, cx, cy, cz):
                     ylin = bakko[1]
                     zlin = bakko[2]
                     cx.append(xlin), cy.append(ylin), cz.append(zlin)
+                    cccok = str(xlin) + ', ' + str(ylin) + ', ' + str(zlin)
+                    ccc.append(str(cccok))
                     baban = 0
                 else:
                     if baban:
@@ -145,6 +147,8 @@ def main1(ooora, cx, cy, cz):
                         ylin = dis_dict[1]
                         zlin = dis_dict[2]
                         cx.append(xlin), cy.append(ylin), cz.append(zlin)
+                        cccok = str(xlin) + ', ' + str(ylin) + ', ' + str(zlin) + '\n'
+                        ccc.append(str(cccok))
                         old_dist = new_dist
                         dis_dict.clear()
             else:
@@ -159,18 +163,21 @@ def main1(ooora, cx, cy, cz):
 if __name__ == '__main__':
     with Manager() as manager:
         neulist = Manager().list()
+        ccclist = Manager().list()
         cxlist = Manager().list()
         cylist = Manager().list()
         czlist = Manager().list()
         p1 = Process(target=sayılr, args=(neulist, ))
-        p2 = Process(target=main1, args=(neulist, cxlist, cylist, czlist))
+        p2 = Process(target=main1, args=(neulist, cxlist, cylist, czlist, ccclist))
         p1.start()
         time.sleep(5)
         p2.start()
     while p1.is_alive() or p2.is_alive():
         time.sleep(5)
     else:
+        file.writelines(ccclist)
         ax.scatter(cxlist, cylist, czlist, c=np.linalg.norm([cxlist, cylist, czlist], axis=0))
         ax.plot_trisurf(np.array(cxlist), np.array(cylist), np.array(czlist))
         ax.view_init(60, 35)
+        file.close()
         plt.show()
