@@ -23,7 +23,7 @@ file = open("copy.txt", "w")
 
 def sayılr(neulist):
     ser = serial.Serial(port="COM3", baudrate=9600)
-    for p in range(72 * 3):
+    for p in range(72 * 1):
         b = ser.readline().decode('ascii')
         newest_dist = int(''.join(filter(str.isdigit, b)))
         time.sleep(0.068012)
@@ -35,8 +35,8 @@ def multiprocess2(r, k, m, n, old_dist1, multi1, multi2, ileri, faz):
     p = math.sin(math.radians(ileri)) * r
     o = int(round(p * p))
     t = math.sqrt(abs((r ^ 2) - o))
-    x_dif = old_dist1 - t
-    y_dif = p
+    x_dif = abs(old_dist1 - t)
+    y_dif = abs(p)
     x = multi1 * abs(x_dif) + k
     y = multi2 * abs(y_dif) + m
     z = 450
@@ -72,9 +72,9 @@ def main1(ooora, cx, cy, cz, ccc):
     up_phase = 0
     baban = 1
     starttime = time.time()
-    for ko in range(3):
+    for ko in range(1):
         for h in range(72):
-            if phase > 348:
+            if phase > 358:
                 phase -= 360
             try:
                 new_dist = int(ooora[0])
@@ -98,18 +98,18 @@ def main1(ooora, cx, cy, cz, ccc):
                     cx.append(xlin), cy.append(ylin), cz.append(zlin)
                     cccok = str(xlin) + ', ' + str(ylin) + ', ' + str(zlin)
                     ccc.append(str(cccok))
-                    baban = 0
                 else:
                     if baban:
                         old_x = (450 + new_dist)
                         old_y = first_y
                         old_dist = new_dist
                         baban = 0
-                        yline.append(first_y)
-                        xline.append(new_dist + 450)
-                        zline.append(new_z)
+                        cy.append(first_y)
+                        cx.append(new_dist + 450)
+                        cz.append(new_z)
+                        print(new_dist, old_x, old_y)
                     else:
-                        if phase != 90 or 180 or 270 or 0:
+                        if phase != 90 and phase != 180 and phase != 270 and phase != 0:
                             if phase < 90:
                                 multiplyer1 = -1
                                 multiplyer2 = 1
@@ -122,9 +122,10 @@ def main1(ooora, cx, cy, cz, ccc):
                             if phase > 270:
                                 multiplyer1 = 1
                                 multiplyer2 = 1
-                            dis_dict = multiprocess2(new_dist, old_x, old_y, old_z, old_dist, multiplyer1, multiplyer2,
+                            dis_dict = multiprocess2(new_dist, old_x, old_y, old_z, old_dist, multiplyer1,
+                                                     multiplyer2,
                                                      phase, up_phase)
-                            print(new_dist, old_x, old_y, old_dist, dis_dict)
+                            print(new_dist, old_x, old_y, old_dist, dis_dict, phase, up_phase)
                         else:
                             if phase == 90:
                                 new_x = 450
@@ -143,13 +144,13 @@ def main1(ooora, cx, cy, cz, ccc):
                                 new_y = 450
                                 new_z = 450 + abs((math.sin(math.radians(up_phase)) * new_dist))
                             dis_dict = [new_x, new_y, new_z]
+                            print(dis_dict, new_x, new_y, new_z, phase)
                         xlin = dis_dict[0]
                         ylin = dis_dict[1]
                         zlin = dis_dict[2]
                         cx.append(xlin), cy.append(ylin), cz.append(zlin)
                         cccok = str(xlin) + ', ' + str(ylin) + ', ' + str(zlin) + '\n'
                         ccc.append(str(cccok))
-                        old_dist = new_dist
                         dis_dict.clear()
             else:
                 print("bozuk veri")
@@ -167,7 +168,7 @@ if __name__ == '__main__':
         cxlist = Manager().list()
         cylist = Manager().list()
         czlist = Manager().list()
-        p1 = Process(target=sayılr, args=(neulist, ))
+        p1 = Process(target=sayılr, args=(neulist,))
         p2 = Process(target=main1, args=(neulist, cxlist, cylist, czlist, ccclist))
         p1.start()
         time.sleep(5)
