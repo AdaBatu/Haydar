@@ -6,6 +6,7 @@ from multiprocessing import Process, Manager
 import numpy as np
 import math
 
+axedif = 8
 zline = []
 xline = []
 yline = []
@@ -23,7 +24,7 @@ file = open("copy.txt", "w")
 
 def sayılr(neulist):
     ser = serial.Serial(port="COM3", baudrate=9600)
-    for p in range(72 * 1):
+    for p in range(72 * axedif):
         b = ser.readline().decode('ascii')
         newest_dist = int(''.join(filter(str.isdigit, b)))
         time.sleep(0.068012)
@@ -37,18 +38,18 @@ def multiprocess2(r, k, m, n, old_dist1, multi1, multi2, ileri, faz):
     t = math.sqrt(abs((r ^ 2) - o))
     x_dif = abs(old_dist1 - t)
     y_dif = abs(p)
-    x = multi1 * abs(x_dif) + k
-    y = multi2 * abs(y_dif) + m
+    x = multi1 * abs(x_dif) + 450
+    y = multi2 * abs(y_dif) + 450
     z = 450
     if faz == 0:
         sncu_dict = [x, y, z]
     else:
         zmif = abs(int(round(math.sin(math.radians(faz)) * r))) + 450
-        zdif = abs(n - zmif)
+        zdif = abs(450 - zmif)
         xmif = math.sqrt(abs((zdif ^ 2) - o))
         ymif = math.sqrt(abs((zdif ^ 2) - int(round(x_dif * x_dif))))
-        x = multi1 * abs(xmif) + k
-        y = multi2 * abs(ymif) + m
+        x = multi1 * abs(xmif) + 450
+        y = multi2 * abs(ymif) + 450
         z = zmif
         sncu_dict = [x, y, z]
     return sncu_dict
@@ -72,7 +73,7 @@ def main1(ooora, cx, cy, cz, ccc):
     up_phase = 0
     baban = 1
     starttime = time.time()
-    for ko in range(1):
+    for ko in range(axedif):
         for h in range(72):
             if phase > 358:
                 phase -= 360
@@ -88,9 +89,6 @@ def main1(ooora, cx, cy, cz, ccc):
                     new_z = 450 + hhug
                     new_x = old_x - (math.sqrt(abs((new_dist ^ 2) - int(round(hhug * hhug)))))
                     new_y = old_y
-                    old_x = new_x
-                    old_y = new_y
-                    old_dist = new_dist
                     bakko = [new_x, new_y, new_z]
                     xlin = bakko[0]
                     ylin = bakko[1]
