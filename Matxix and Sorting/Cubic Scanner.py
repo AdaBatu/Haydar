@@ -6,7 +6,7 @@ from multiprocessing import Process, Manager
 import numpy as np
 import math
 
-axedif = 8
+axedif = 4
 zline = []
 xline = []
 yline = []
@@ -27,7 +27,7 @@ def sayılr(neulist):
     for p in range(72 * axedif):
         b = ser.readline().decode('ascii')
         newest_dist = int(''.join(filter(str.isdigit, b)))
-        time.sleep(0.068012)
+        time.sleep(0.055512)
         neulist.append(newest_dist), print(b)
     ser.close()
 
@@ -35,23 +35,35 @@ def sayılr(neulist):
 def multiprocess2(r, k, m, n, old_dist1, multi1, multi2, ileri, faz):
     p = math.sin(math.radians(ileri)) * r
     o = int(round(p * p))
+    cosimux = abs(math.cos(math.radians(ileri)) * r)
     t = math.sqrt(abs((r ^ 2) - o))
     x_dif = abs(old_dist1 - t)
     y_dif = abs(p)
-    x = multi1 * abs(x_dif) + 450
+    x = multi1 * abs(cosimux) + 450
     y = multi2 * abs(y_dif) + 450
     z = 450
     if faz == 0:
         sncu_dict = [x, y, z]
     else:
+        dif_bdt = math.sqrt(round(((k - x) * (k - x)) + ((m - y) * (m - y))))
+        cos_dif = math.cos(math.radians(faz)) * r
         zmif = abs(int(round(math.sin(math.radians(faz)) * r))) + 450
         zdif = abs(450 - zmif)
-        xmif = math.sqrt(abs((zdif ^ 2) - o))
-        ymif = math.sqrt(abs((zdif ^ 2) - int(round(x_dif * x_dif))))
-        x = multi1 * abs(xmif) + 450
-        y = multi2 * abs(ymif) + 450
+        balk = abs(math.sin(math.radians(ileri)) * cos_dif)
+        bro = math.sqrt(abs((zdif ^ 2) + round(balk * balk)))
+        xmif = math.sqrt(round(abs((bro * bro) - (dif_bdt * dif_bdt))))
+        bb1 = old_dist1 - xmif
+        # ymif = math.sqrt(round(abs((dif_bdt * dif_bdt) - o)))
+        # ymif = math.sqrt(abs((zdif ^ 2) - int(round(x_dif * x_dif))))
+        if 90 < faz < 270:
+            x = multi1 * (xmif + old_dist1) + 450
+            y = multi2 * (-1 * balk) + 450
+        else:
+            x = multi1 * bb1 + 450
+            y = multi2 * abs(balk) + 450
         z = zmif
         sncu_dict = [x, y, z]
+        print(xmif, balk, multi1, multi2, old_dist1)
     return sncu_dict
 
 
@@ -123,7 +135,7 @@ def main1(ooora, cx, cy, cz, ccc):
                             dis_dict = multiprocess2(new_dist, old_x, old_y, old_z, old_dist, multiplyer1,
                                                      multiplyer2,
                                                      phase, up_phase)
-                            print(new_dist, old_x, old_y, old_dist, dis_dict, phase, up_phase)
+                            print(new_dist, old_x, old_y, dis_dict, phase, up_phase)
                         else:
                             if phase == 90:
                                 new_x = 450
