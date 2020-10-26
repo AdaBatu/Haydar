@@ -6,7 +6,9 @@ from multiprocessing import Process, Manager
 import numpy as np
 import math
 
-axedif = 4
+axedif = 10
+ilerleyis = 10
+yukarı_ieri = 10
 zline = []
 xline = []
 yline = []
@@ -56,10 +58,10 @@ def multiprocess2(r, k, m, n, old_dist1, multi1, multi2, ileri, faz):
         # ymif = math.sqrt(round(abs((dif_bdt * dif_bdt) - o)))
         # ymif = math.sqrt(abs((zdif ^ 2) - int(round(x_dif * x_dif))))
         if 90 < faz < 270:
-            x = multi1 * (xmif + old_dist1) + 450
-            y = multi2 * (-1 * balk) + 450
+            x = multi1 * xmif + 450 - old_dist1
+            y = multi2 * abs(balk) + 450
         else:
-            x = multi1 * bb1 + 450
+            x = multi1 * abs(bb1) + 450
             y = multi2 * abs(balk) + 450
         z = zmif
         sncu_dict = [x, y, z]
@@ -68,6 +70,7 @@ def multiprocess2(r, k, m, n, old_dist1, multi1, multi2, ileri, faz):
 
 
 def main1(ooora, cx, cy, cz, ccc):
+    gargamel = int
     anan = 0
     old_x = int
     old_y = 0
@@ -76,8 +79,7 @@ def main1(ooora, cx, cy, cz, ccc):
     new_y = 0
     new_z = 450
     old_dist = 0
-    ilerleyis = 10
-    yukarı_ieri = 5
+
     multiplyer1 = 0
     multiplyer2 = 0
     first_y = 450
@@ -121,18 +123,18 @@ def main1(ooora, cx, cy, cz, ccc):
                     else:
                         if phase != 90 and phase != 180 and phase != 270 and phase != 0:
                             if phase < 90:
-                                multiplyer1 = -1
+                                multiplyer1 = 1
                                 multiplyer2 = 1
                             if 180 > phase > 90:
                                 multiplyer1 = -1
-                                multiplyer2 = -1
+                                multiplyer2 = 1
                             if 180 < phase < 270:
-                                multiplyer1 = 1
+                                multiplyer1 = -1
                                 multiplyer2 = -1
                             if phase > 270:
                                 multiplyer1 = 1
-                                multiplyer2 = 1
-                            dis_dict = multiprocess2(new_dist, old_x, old_y, old_z, old_dist, multiplyer1,
+                                multiplyer2 = -1
+                            dis_dict = multiprocess2(new_dist, old_x, old_y, gargamel, old_dist, multiplyer1,
                                                      multiplyer2,
                                                      phase, up_phase)
                             print(new_dist, old_x, old_y, dis_dict, phase, up_phase)
@@ -141,18 +143,27 @@ def main1(ooora, cx, cy, cz, ccc):
                                 new_x = 450
                                 new_y = new_dist + 450
                                 new_z = 450 + abs((math.sin(math.radians(up_phase)) * new_dist))
+                                if up_phase != 0:
+                                    new_y = abs(math.cos(math.radians(up_phase)) * new_dist) + 450
                             if phase == 180:
                                 new_x = 450 - new_dist
                                 new_y = 450
                                 new_z = 450 + abs((math.sin(math.radians(up_phase)) * new_dist))
+                                if up_phase != 0:
+                                    new_x = -abs(math.cos(math.radians(up_phase)) * new_dist) + 450
                             if phase == 270:
                                 new_x = 450
                                 new_y = -new_dist + 450
                                 new_z = 450 + abs((math.sin(math.radians(up_phase)) * new_dist))
+                                if up_phase != 0:
+                                    new_y = -abs(math.cos(math.radians(up_phase)) * new_dist) + 450
+                                gargamel = new_dist
                             if phase == 0:
                                 new_x = new_dist + 450
                                 new_y = 450
                                 new_z = 450 + abs((math.sin(math.radians(up_phase)) * new_dist))
+                                if up_phase != 0:
+                                    new_x = abs(math.cos(math.radians(up_phase)) * new_dist) + 450
                             dis_dict = [new_x, new_y, new_z]
                             print(dis_dict, new_x, new_y, new_z, phase)
                         xlin = dis_dict[0]
