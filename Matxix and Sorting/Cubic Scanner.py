@@ -49,19 +49,18 @@ def multiprocess2(r, k, m, n, old_dist1, multi1, multi2, ileri, faz):
     else:
         dif_bdt = math.sqrt(round(((k - x) * (k - x)) + ((m - y) * (m - y))))
         cos_dif = math.cos(math.radians(faz)) * r
-        zmif = abs(int(round(math.sin(math.radians(faz)) * r))) + 450
-        zdif = abs(450 - zmif)
+        zmif = abs(int(math.sin(math.radians(faz)) * r)) + 450
+        zdif = round(abs(450 - zmif))
         balk = abs(math.sin(math.radians(ileri)) * cos_dif)
-        bro = math.sqrt(abs((zdif ^ 2) + round(balk * balk)))
+        bro = math.sqrt(abs(round((zdif * zdif) + (balk * balk))))
         xmif = math.sqrt(round(abs((bro * bro) - (dif_bdt * dif_bdt))))
-        bb1 = old_dist1 - xmif
         # ymif = math.sqrt(round(abs((dif_bdt * dif_bdt) - o)))
         # ymif = math.sqrt(abs((zdif ^ 2) - int(round(x_dif * x_dif))))
         if 90 < faz < 270:
-            x = multi1 * xmif + 450 - old_dist1
+            x = multi1 * abs(old_dist1 - xmif) + 450   #causes problem in Algorithm
             y = multi2 * abs(balk) + 450
         else:
-            x = multi1 * abs(bb1) + 450
+            x = multi1 * abs(old_dist1 - xmif) + 450
             y = multi2 * abs(balk) + 450
         z = zmif
         sncu_dict = [x, y, z]
