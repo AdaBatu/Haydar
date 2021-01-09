@@ -6,7 +6,7 @@ from multiprocessing import Process, Manager
 import numpy as np
 import math
 
-axedif = 10
+axedif = 360 * 80
 ilerleyis = 10
 yukarı_ieri = 10
 zline = []
@@ -25,12 +25,42 @@ file = open("copy.txt", "w")
 
 
 def sayılr(neulist):
+    listof1 = []
+    listof2 = []
+    final1 = []
+    final2 = []
+    bab = 'afdsfsdf'
     ser = serial.Serial(port="COM3", baudrate=9600)
-    for p in range(72 * axedif):
+    time.sleep(4)
+    ser.write(bab.encode('ascii'))
+    for p in range(axedif*2):  # 576
         b = ser.readline().decode('ascii')
-        newest_dist = int(''.join(filter(str.isdigit, b)))
-        time.sleep(0.055512)
-        neulist.append(newest_dist), print(b)
+        raw = b[:-2].strip()
+        unraw = raw[2:]
+        if b[0] == "1":
+            listof1.append(unraw)
+        else:
+            listof2.append(unraw)
+        print(b)
+        #time.sleep(0.055512)
+    print(listof1, listof2)
+    listof1.sort()
+    print(listof1)
+    listof2.sort()
+    print(listof2)
+    for ka1 in listof1:
+        final1.append(int(ka1.split(" ")[1]))
+    for ka2 in listof2:
+        final2.append(int(ka2.split(" ")[1]))
+    print(final1, final2)
+    for fin in range(len(final1)):
+        if final1[fin] == 0:
+            neulist.append(final2[fin])
+        else:
+            if final2[fin] != 0:
+                neulist.append(final1[fin] / 2 + final2[fin] / 2)
+            if final2[fin] == 0:
+                neulist.append(int(0))
     ser.close()
 
 
@@ -87,95 +117,95 @@ def main1(ooora, cx, cy, cz, ccc):
     baban = 1
     starttime = time.time()
     for ko in range(axedif):
-        for h in range(72):
-            if phase > 358:
-                phase -= 360
-            try:
-                new_dist = int(ooora[0])
-            except IndexError:
-                time.sleep(1)
-                new_dist = int(ooora[0])
-            del ooora[0]
-            if new_dist < 500:
-                if anan:
-                    hhug = abs((math.sin(up_phase) * new_dist))
-                    new_z = 450 + hhug
-                    new_x = old_x - (math.sqrt(abs((new_dist ^ 2) - int(round(hhug * hhug)))))
-                    new_y = old_y
-                    bakko = [new_x, new_y, new_z]
-                    xlin = bakko[0]
-                    ylin = bakko[1]
-                    zlin = bakko[2]
-                    cx.append(xlin), cy.append(ylin), cz.append(zlin)
-                    cccok = str(xlin) + ', ' + str(ylin) + ', ' + str(zlin)
-                    ccc.append(str(cccok))
-                else:
-                    if baban:
-                        old_x = (450 + new_dist)
-                        old_y = first_y
-                        old_dist = new_dist
-                        baban = 0
-                        cy.append(first_y)
-                        cx.append(new_dist + 450)
-                        cz.append(new_z)
-                        print(new_dist, old_x, old_y)
-                    else:
-                        if phase != 90 and phase != 180 and phase != 270 and phase != 0:
-                            if phase < 90:
-                                multiplyer1 = 1
-                                multiplyer2 = 1
-                            if 180 > phase > 90:
-                                multiplyer1 = -1
-                                multiplyer2 = 1
-                            if 180 < phase < 270:
-                                multiplyer1 = -1
-                                multiplyer2 = -1
-                            if phase > 270:
-                                multiplyer1 = 1
-                                multiplyer2 = -1
-                            dis_dict = multiprocess2(new_dist, old_x, old_y, gargamel, old_dist, multiplyer1,
-                                                     multiplyer2,
-                                                     phase, up_phase)
-                            print(new_dist, old_x, old_y, dis_dict, phase, up_phase)
-                        else:
-                            if phase == 90:
-                                new_x = 450
-                                new_y = new_dist + 450
-                                new_z = 450 + abs((math.sin(math.radians(up_phase)) * new_dist))
-                                if up_phase != 0:
-                                    new_y = abs(math.cos(math.radians(up_phase)) * new_dist) + 450
-                            if phase == 180:
-                                new_x = 450 - new_dist
-                                new_y = 450
-                                new_z = 450 + abs((math.sin(math.radians(up_phase)) * new_dist))
-                                if up_phase != 0:
-                                    new_x = -abs(math.cos(math.radians(up_phase)) * new_dist) + 450
-                            if phase == 270:
-                                new_x = 450
-                                new_y = -new_dist + 450
-                                new_z = 450 + abs((math.sin(math.radians(up_phase)) * new_dist))
-                                if up_phase != 0:
-                                    new_y = -abs(math.cos(math.radians(up_phase)) * new_dist) + 450
-                                gargamel = new_dist
-                            if phase == 0:
-                                new_x = new_dist + 450
-                                new_y = 450
-                                new_z = 450 + abs((math.sin(math.radians(up_phase)) * new_dist))
-                                if up_phase != 0:
-                                    new_x = abs(math.cos(math.radians(up_phase)) * new_dist) + 450
-                            dis_dict = [new_x, new_y, new_z]
-                            print(dis_dict, new_x, new_y, new_z, phase)
-                        xlin = dis_dict[0]
-                        ylin = dis_dict[1]
-                        zlin = dis_dict[2]
-                        cx.append(xlin), cy.append(ylin), cz.append(zlin)
-                        cccok = str(xlin) + ', ' + str(ylin) + ', ' + str(zlin) + '\n'
-                        ccc.append(str(cccok))
-                        dis_dict.clear()
+        if phase > 358:
+            phase -= 360
+        try:
+            new_dist = int(ooora[0])
+        except IndexError:
+            time.sleep(1)
+            new_dist = int(ooora[0])
+        del ooora[0]
+        print(new_dist)
+        if new_dist < 500:
+            if anan:
+                hhug = abs((math.sin(up_phase) * new_dist))
+                new_z = 450 + hhug
+                new_x = old_x - (math.sqrt(abs((new_dist ^ 2) - int(round(hhug * hhug)))))
+                new_y = old_y
+                bakko = [new_x, new_y, new_z]
+                xlin = bakko[0]
+                ylin = bakko[1]
+                zlin = bakko[2]
+                cx.append(xlin), cy.append(ylin), cz.append(zlin)
+                cccok = str(xlin) + ', ' + str(ylin) + ', ' + str(zlin)
+                ccc.append(str(cccok))
             else:
-                print("bozuk veri")
-            phase += ilerleyis
-            anan = 0
+                if baban:
+                    old_x = (450 + new_dist)
+                    old_y = first_y
+                    old_dist = new_dist
+                    baban = 0
+                    cy.append(first_y)
+                    cx.append(new_dist + 450)
+                    cz.append(new_z)
+                    print(new_dist, old_x, old_y)
+                else:
+                    if phase != 90 and phase != 180 and phase != 270 and phase != 0:
+                        if phase < 90:
+                            multiplyer1 = 1
+                            multiplyer2 = 1
+                        if 180 > phase > 90:
+                            multiplyer1 = -1
+                            multiplyer2 = 1
+                        if 180 < phase < 270:
+                            multiplyer1 = -1
+                            multiplyer2 = -1
+                        if phase > 270:
+                            multiplyer1 = 1
+                            multiplyer2 = -1
+                        dis_dict = multiprocess2(new_dist, old_x, old_y, gargamel, old_dist, multiplyer1,
+                                                 multiplyer2,
+                                                 phase, up_phase)
+                        print(new_dist, old_x, old_y, dis_dict, phase, up_phase)
+                    else:
+                        if phase == 90:
+                            new_x = 450
+                            new_y = new_dist + 450
+                            new_z = 450 + abs((math.sin(math.radians(up_phase)) * new_dist))
+                            if up_phase != 0:
+                                new_y = abs(math.cos(math.radians(up_phase)) * new_dist) + 450
+                        if phase == 180:
+                            new_x = 450 - new_dist
+                            new_y = 450
+                            new_z = 450 + abs((math.sin(math.radians(up_phase)) * new_dist))
+                            if up_phase != 0:
+                                new_x = -abs(math.cos(math.radians(up_phase)) * new_dist) + 450
+                        if phase == 270:
+                            new_x = 450
+                            new_y = -new_dist + 450
+                            new_z = 450 + abs((math.sin(math.radians(up_phase)) * new_dist))
+                            if up_phase != 0:
+                                new_y = -abs(math.cos(math.radians(up_phase)) * new_dist) + 450
+                            gargamel = new_dist
+                        if phase == 0:
+                            new_x = new_dist + 450
+                            new_y = 450
+                            new_z = 450 + abs((math.sin(math.radians(up_phase)) * new_dist))
+                            if up_phase != 0:
+                                new_x = abs(math.cos(math.radians(up_phase)) * new_dist) + 450
+                        dis_dict = [new_x, new_y, new_z]
+                        print(dis_dict, new_x, new_y, new_z, phase)
+                    xlin = dis_dict[0]
+                    ylin = dis_dict[1]
+                    zlin = dis_dict[2]
+                    cx.append(xlin), cy.append(ylin), cz.append(zlin)
+                    cccok = str(xlin) + ', ' + str(ylin) + ', ' + str(zlin) + '\n'
+                    ccc.append(str(cccok))
+                    dis_dict.clear()
+        else:
+            print("bozuk veri")
+        phase += ilerleyis
+        anan = 0
         up_phase += yukarı_ieri
         anan = 1
     print('That took {} seconds'.format(time.time() - starttime))
@@ -192,6 +222,8 @@ if __name__ == '__main__':
         p2 = Process(target=main1, args=(neulist, cxlist, cylist, czlist, ccclist))
         p1.start()
         time.sleep(5)
+        p1.join()
+        print(neulist)
         p2.start()
     while p1.is_alive() or p2.is_alive():
         time.sleep(5)

@@ -2,32 +2,45 @@ import pyfirmata
 import time
 from tkinter import *
 import tkinter
+import serial
 
-board = pyfirmata.Arduino('COM3')
-it = pyfirmata.util.Iterator(board)
-it.start()
-triger = board.get_pin('d:10:o')
-echo = board.get_pin('d:8:i')
-orta = 1
-bacı = 1
-
-while bacı == 1:
-    triger.write(0)
-    time.sleep(0.002)
-    triger.write(1)
-    time.sleep(0.01)
-    triger.write(0)
-    time23 = 0
-    if echo.read():
-        while echo.read() == 0:
-            time23 += 1
-        else:
-            distance = time23 * 0.034 / 2
-            print(distance)
-            orta += 1
-            time.sleep(0.02)
-else:
-    print(distance)
+lal = []
+listof1 = []
+listof2 = []
+final = []
+final1 = []
+final2 = []
+bab = 'sa'
+ser = serial.Serial(port="COM3", baudrate=9600)
+time.sleep(4)
+ser.write(bab.encode('ascii'))
+for p in range(10):  #576
+    b = ser.readline().decode('ascii')
+    raw = b[:-2].strip()
+    unraw = raw[2:]
+    if b[0] == "1":
+        listof1.append(unraw)
+    else:
+        listof2.append(unraw)
+print(listof1, listof2)
+listof1.sort()
+print(listof1)
+listof2.sort()
+print(listof2)
+for ka1 in listof1:
+    final1.append(int(ka1.split(" ")[1]))
+for ka2 in listof2:
+    final2.append(int(ka2.split(" ")[1]))
+print(final1, final2)
+for fin in range(len(final1)):
+    if final1[fin] == 0:
+        final.append(final2[fin])
+    else:
+        if final2[fin] != 0:
+            final.append(final1[fin]/2+final2[fin]/2)
+        if final2[fin] == 0:
+            final.append(int(0))
+print(final)
 
 
 
