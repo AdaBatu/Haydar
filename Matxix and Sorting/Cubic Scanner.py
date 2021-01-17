@@ -24,7 +24,8 @@ ax.set_title('3D Projection')
 file = open("copy.txt", "w")
 
 
-def sayılr(neulist):
+def sayılr():
+#def sayılr(neulist):
     listof1 = []
     listof2 = []
     final1 = []
@@ -62,6 +63,7 @@ def sayılr(neulist):
             if final2[fin] == 0:
                 neulist.append(int(0))
     ser.close()
+    return neulist
 
 
 def multiprocess2(r, k, m, n, old_dist1, multi1, multi2, ileri, faz):
@@ -98,7 +100,8 @@ def multiprocess2(r, k, m, n, old_dist1, multi1, multi2, ileri, faz):
     return sncu_dict
 
 
-def main1(ooora, cx, cy, cz, ccc):
+def main1(ooora):
+#def main1(ooora, cx, cy, cz, ccc):
     gargamel = int
     anan = 0
     old_x = int
@@ -108,6 +111,7 @@ def main1(ooora, cx, cy, cz, ccc):
     new_y = 0
     new_z = 450
     old_dist = 0
+    cx, cy, cz, ccc = []
 
     multiplyer1 = 0
     multiplyer2 = 0
@@ -209,6 +213,7 @@ def main1(ooora, cx, cy, cz, ccc):
         up_phase += yukarı_ieri
         anan = 1
     print('That took {} seconds'.format(time.time() - starttime))
+    return cx, cy, cz, ccc
 
 
 if __name__ == '__main__':
@@ -220,11 +225,14 @@ if __name__ == '__main__':
         czlist = Manager().list()
         p1 = Process(target=sayılr, args=(neulist,))
         p2 = Process(target=main1, args=(neulist, cxlist, cylist, czlist, ccclist))
-        p1.start()
-        time.sleep(5)
-        p1.join()
+        #p1.start()
+        #time.sleep(5)
+        #p1.join()
+        oooooo = sayılr()
         print(neulist)
-        p2.start()
+        cxlist, cylist, czlist, ccclist = main1(oooooo)
+        print(cxlist, cylist, czlist, ccclist)
+        #p2.start()
     while p1.is_alive() or p2.is_alive():
         time.sleep(5)
     else:
