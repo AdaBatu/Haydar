@@ -6,7 +6,7 @@ from multiprocessing import Process, Manager
 import numpy as np
 import math
 
-axedif = 360 * 80
+axedif = 36 * 8
 ilerleyis = 10
 yukarı_ieri = 10
 zline = []
@@ -34,7 +34,7 @@ def sayılr():
     ser = serial.Serial(port="COM3", baudrate=9600)
     time.sleep(4)
     ser.write(bab.encode('ascii'))
-    for p in range(axedif*2):  # 576
+    for p in range(axedif*2):  # 577-1=576
         b = ser.readline().decode('ascii')
         raw = b[:-2].strip()
         unraw = raw[2:]
@@ -100,8 +100,8 @@ def multiprocess2(r, k, m, n, old_dist1, multi1, multi2, ileri, faz):
     return sncu_dict
 
 
-def main1(ooora):
 #def main1(ooora, cx, cy, cz, ccc):
+def main1(ooora):
     gargamel = int
     anan = 0
     old_x = int
@@ -111,7 +111,7 @@ def main1(ooora):
     new_y = 0
     new_z = 450
     old_dist = 0
-    cx, cy, cz, ccc = []
+    cx, cy, cz, ccc = ([] for hj in range(4))
 
     multiplyer1 = 0
     multiplyer2 = 0
@@ -120,96 +120,97 @@ def main1(ooora):
     up_phase = 0
     baban = 1
     starttime = time.time()
-    for ko in range(axedif):
-        if phase > 358:
-            phase -= 360
-        try:
-            new_dist = int(ooora[0])
-        except IndexError:
-            time.sleep(1)
-            new_dist = int(ooora[0])
-        del ooora[0]
-        print(new_dist)
-        if new_dist < 500:
-            if anan:
-                hhug = abs((math.sin(up_phase) * new_dist))
-                new_z = 450 + hhug
-                new_x = old_x - (math.sqrt(abs((new_dist ^ 2) - int(round(hhug * hhug)))))
-                new_y = old_y
-                bakko = [new_x, new_y, new_z]
-                xlin = bakko[0]
-                ylin = bakko[1]
-                zlin = bakko[2]
-                cx.append(xlin), cy.append(ylin), cz.append(zlin)
-                cccok = str(xlin) + ', ' + str(ylin) + ', ' + str(zlin)
-                ccc.append(str(cccok))
-            else:
-                if baban:
-                    old_x = (450 + new_dist)
-                    old_y = first_y
-                    old_dist = new_dist
-                    baban = 0
-                    cy.append(first_y)
-                    cx.append(new_dist + 450)
-                    cz.append(new_z)
-                    print(new_dist, old_x, old_y)
-                else:
-                    if phase != 90 and phase != 180 and phase != 270 and phase != 0:
-                        if phase < 90:
-                            multiplyer1 = 1
-                            multiplyer2 = 1
-                        if 180 > phase > 90:
-                            multiplyer1 = -1
-                            multiplyer2 = 1
-                        if 180 < phase < 270:
-                            multiplyer1 = -1
-                            multiplyer2 = -1
-                        if phase > 270:
-                            multiplyer1 = 1
-                            multiplyer2 = -1
-                        dis_dict = multiprocess2(new_dist, old_x, old_y, gargamel, old_dist, multiplyer1,
-                                                 multiplyer2,
-                                                 phase, up_phase)
-                        print(new_dist, old_x, old_y, dis_dict, phase, up_phase)
-                    else:
-                        if phase == 90:
-                            new_x = 450
-                            new_y = new_dist + 450
-                            new_z = 450 + abs((math.sin(math.radians(up_phase)) * new_dist))
-                            if up_phase != 0:
-                                new_y = abs(math.cos(math.radians(up_phase)) * new_dist) + 450
-                        if phase == 180:
-                            new_x = 450 - new_dist
-                            new_y = 450
-                            new_z = 450 + abs((math.sin(math.radians(up_phase)) * new_dist))
-                            if up_phase != 0:
-                                new_x = -abs(math.cos(math.radians(up_phase)) * new_dist) + 450
-                        if phase == 270:
-                            new_x = 450
-                            new_y = -new_dist + 450
-                            new_z = 450 + abs((math.sin(math.radians(up_phase)) * new_dist))
-                            if up_phase != 0:
-                                new_y = -abs(math.cos(math.radians(up_phase)) * new_dist) + 450
-                            gargamel = new_dist
-                        if phase == 0:
-                            new_x = new_dist + 450
-                            new_y = 450
-                            new_z = 450 + abs((math.sin(math.radians(up_phase)) * new_dist))
-                            if up_phase != 0:
-                                new_x = abs(math.cos(math.radians(up_phase)) * new_dist) + 450
-                        dis_dict = [new_x, new_y, new_z]
-                        print(dis_dict, new_x, new_y, new_z, phase)
-                    xlin = dis_dict[0]
-                    ylin = dis_dict[1]
-                    zlin = dis_dict[2]
+    for ko in range(8):
+        for h in range(36):
+            if phase > 358:
+                phase -= 360
+            try:
+                new_dist = int(ooora[0])
+            except IndexError:
+                time.sleep(1)
+                new_dist = int(ooora[0])
+            del ooora[0]
+            print(new_dist)
+            if new_dist < 500:
+                if anan:
+                    hhug = abs((math.sin(up_phase) * new_dist))
+                    new_z = 450 + hhug
+                    new_x = old_x - (math.sqrt(abs((new_dist ^ 2) - int(round(hhug * hhug)))))
+                    new_y = old_y
+                    bakko = [new_x, new_y, new_z]
+                    xlin = bakko[0]
+                    ylin = bakko[1]
+                    zlin = bakko[2]
                     cx.append(xlin), cy.append(ylin), cz.append(zlin)
-                    cccok = str(xlin) + ', ' + str(ylin) + ', ' + str(zlin) + '\n'
+                    cccok = str(xlin) + ', ' + str(ylin) + ', ' + str(zlin)
                     ccc.append(str(cccok))
-                    dis_dict.clear()
-        else:
-            print("bozuk veri")
-        phase += ilerleyis
-        anan = 0
+                else:
+                    if baban:
+                        old_x = (450 + new_dist)
+                        old_y = first_y
+                        old_dist = new_dist
+                        baban = 0
+                        cy.append(first_y)
+                        cx.append(new_dist + 450)
+                        cz.append(new_z)
+                        print(new_dist, old_x, old_y)
+                    else:
+                        if phase != 90 and phase != 180 and phase != 270 and phase != 0:
+                            if phase < 90:
+                                multiplyer1 = 1
+                                multiplyer2 = 1
+                            if 180 > phase > 90:
+                                multiplyer1 = -1
+                                multiplyer2 = 1
+                            if 180 < phase < 270:
+                                multiplyer1 = -1
+                                multiplyer2 = -1
+                            if phase > 270:
+                                multiplyer1 = 1
+                                multiplyer2 = -1
+                            dis_dict = multiprocess2(new_dist, old_x, old_y, gargamel, old_dist, multiplyer1,
+                                                     multiplyer2,
+                                                     phase, up_phase)
+                            print(new_dist, old_x, old_y, dis_dict, phase, up_phase)
+                        else:
+                            if phase == 90:
+                                new_x = 450
+                                new_y = new_dist + 450
+                                new_z = 450 + abs((math.sin(math.radians(up_phase)) * new_dist))
+                                if up_phase != 0:
+                                    new_y = abs(math.cos(math.radians(up_phase)) * new_dist) + 450
+                            if phase == 180:
+                                new_x = 450 - new_dist
+                                new_y = 450
+                                new_z = 450 + abs((math.sin(math.radians(up_phase)) * new_dist))
+                                if up_phase != 0:
+                                    new_x = -abs(math.cos(math.radians(up_phase)) * new_dist) + 450
+                            if phase == 270:
+                                new_x = 450
+                                new_y = -new_dist + 450
+                                new_z = 450 + abs((math.sin(math.radians(up_phase)) * new_dist))
+                                if up_phase != 0:
+                                    new_y = -abs(math.cos(math.radians(up_phase)) * new_dist) + 450
+                                gargamel = new_dist
+                            if phase == 0:
+                                new_x = new_dist + 450
+                                new_y = 450
+                                new_z = 450 + abs((math.sin(math.radians(up_phase)) * new_dist))
+                                if up_phase != 0:
+                                    new_x = abs(math.cos(math.radians(up_phase)) * new_dist) + 450
+                            dis_dict = [new_x, new_y, new_z]
+                            print(dis_dict, new_x, new_y, new_z, phase)
+                        xlin = dis_dict[0]
+                        ylin = dis_dict[1]
+                        zlin = dis_dict[2]
+                        cx.append(xlin), cy.append(ylin), cz.append(zlin)
+                        cccok = str(xlin) + ', ' + str(ylin) + ', ' + str(zlin) + '\n'
+                        ccc.append(str(cccok))
+                        dis_dict.clear()
+            else:
+                print("bozuk veri")
+            phase += ilerleyis
+            anan = 0
         up_phase += yukarı_ieri
         anan = 1
     print('That took {} seconds'.format(time.time() - starttime))
@@ -228,8 +229,9 @@ if __name__ == '__main__':
         #p1.start()
         #time.sleep(5)
         #p1.join()
-        oooooo = sayılr()
-        print(neulist)
+        #oooooo = sayılr()
+        oooooo = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100]
+        #print(neulist)
         cxlist, cylist, czlist, ccclist = main1(oooooo)
         print(cxlist, cylist, czlist, ccclist)
         #p2.start()
@@ -238,7 +240,7 @@ if __name__ == '__main__':
     else:
         file.writelines(ccclist)
         ax.scatter(cxlist, cylist, czlist, c=np.linalg.norm([cxlist, cylist, czlist], axis=0))
-        ax.plot_trisurf(np.array(cxlist), np.array(cylist), np.array(czlist))
+        #ax.plot_trisurf(np.array(cxlist), np.array(cylist), np.array(czlist))
         ax.view_init(60, 35)
         file.close()
         plt.show()
