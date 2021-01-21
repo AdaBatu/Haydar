@@ -246,7 +246,7 @@ if __name__ == '__main__':
     else:
         file.writelines(ccclist)
         ax.scatter(cxlist, cylist, czlist, c=np.linalg.norm([cxlist, cylist, czlist], axis=0))
-        #ax.plot_trisurf(np.array(cxlist), np.array(cylist), np.array(czlist))
+        ax.plot_trisurf(np.array(cxlist), np.array(cylist), np.array(czlist))
         ax.view_init(60, 35)
         file.close()
         plt.show()
