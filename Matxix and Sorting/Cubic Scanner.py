@@ -79,24 +79,30 @@ def multiprocess2(r, k, m, n, old_dist1, multi1, multi2, ileri, faz):
     if faz == 0:
         sncu_dict = [x, y, z]
     else:
-        dif_bdt = math.sqrt(round(((k - x) * (k - x)) + ((m - y) * (m - y))))
-        cos_dif = math.cos(math.radians(faz)) * r
+        ui = abs(math.cos(math.radians(faz)) * r)
+        po = abs(math.sin(math.radians(ileri)) * ui)
+        ou = abs(math.cos(math.radians(ileri)) * ui)
+        #yu = math.sin(math.radians(ileri)) * cosimux
+        #dif_bdt = math.sqrt(round(((k - x) * (k - x)) + ((m - y) * (m - y))))
+        #cos_dif = math.cos(math.radians(faz)) * r
         zmif = abs(int(math.sin(math.radians(faz)) * r)) + 450
-        zdif = round(abs(450 - zmif))
-        balk = abs(math.sin(math.radians(ileri)) * cos_dif)
-        bro = math.sqrt(abs(round((zdif * zdif) + (balk * balk))))
-        xmif = math.sqrt(round(abs((bro * bro) - (dif_bdt * dif_bdt))))
+        #zdif = round(abs(450 - zmif))
+        #balk = abs(math.sin(math.radians(ileri)) * cos_dif)
+        #bro = math.sqrt(abs(round((zdif * zdif) + (balk * balk))))
+        #xmif = math.sqrt(round(abs((bro * bro) - (dif_bdt * dif_bdt))))
         # ymif = math.sqrt(round(abs((dif_bdt * dif_bdt) - o)))
         # ymif = math.sqrt(abs((zdif ^ 2) - int(round(x_dif * x_dif))))
-        if 90 < faz < 270:
-            x = multi1 * abs(old_dist1 - xmif) + 450   #causes problem in Algorithm
-            y = multi2 * abs(balk) + 450
-        else:
-            x = multi1 * abs(old_dist1 - xmif) + 450
-            y = multi2 * abs(balk) + 450
+        x = multi1 * abs(ou) + 450
+        y = multi2 * abs(po) + 450
+        #if 90 < faz < 270:
+            #x = multi1 * abs(old_dist1 - xmif) + 450   #causes problem in Algorithm
+            #y = multi2 * abs(balk) + 450
+        #else:
+            #x = multi1 * abs(old_dist1 - xmif) + 450
+            #y = multi2 * abs(balk) + 450
         z = zmif
         sncu_dict = [x, y, z]
-        print(xmif, balk, multi1, multi2, old_dist1)
+        print(multi1, multi2, old_dist1) # balk, xmif
     return sncu_dict
 
 
@@ -212,7 +218,7 @@ def main1(ooora):
             phase += ilerleyis
             anan = 0
         up_phase += yukarı_ieri
-        anan = 1
+    #anan = 1
     print('That took {} seconds'.format(time.time() - starttime))
     return cx, cy, cz, ccc
 
