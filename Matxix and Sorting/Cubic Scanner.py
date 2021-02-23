@@ -68,10 +68,10 @@ def sayılr():
 
 def multiprocess2(r, k, m, n, old_dist1, multi1, multi2, ileri, faz):
     p = math.sin(math.radians(ileri)) * r
-    o = int(round(p * p))
+    #o = int(round(p * p))
     cosimux = abs(math.cos(math.radians(ileri)) * r)
-    t = math.sqrt(abs((r ^ 2) - o))
-    x_dif = abs(old_dist1 - t)
+    #t = math.sqrt(abs((r ^ 2) - o))
+    #x_dif = abs(old_dist1 - t)
     y_dif = abs(p)
     x = multi1 * abs(cosimux) + 450
     y = multi2 * abs(y_dif) + 450
