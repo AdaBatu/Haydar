@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="286b3380-dfe7-4ded-bb73-e54e7d1c5b5f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/Cubic Scanner.py" beforeDir="false" afterPath="$PROJECT_DIR$/Cubic Scanner.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="Matxix and Sorting" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1jIMcSSntelEQOf8kZJDiACUrdv" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Photo_for_Ai.py" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\GitHub\Haydar\Haydar\Matxix and Sorting" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.Photo_for_Ai">
+    <configuration name="Arduino Control" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Matxix and Sorting" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Arduino Control.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Cubic Scanner" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Matxix and Sorting" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Cubic Scanner.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Photo_for_Ai" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="Matxix and Sorting" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="D:\Python 3.9\pythonw.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Photo_for_Ai.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="scatter" type="PythonConfigurationType" factoryName="Python">
+      <module name="Matxix and Sorting" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="D:\Python 3.9\pythonw.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Scatter.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.scatter" />
+      <item itemvalue="Python.Photo_for_Ai" />
+      <item itemvalue="Python.Arduino Control" />
+      <item itemvalue="Python.Cubic Scanner" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.Cubic Scanner" />
+        <item itemvalue="Python.Arduino Control" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="286b3380-dfe7-4ded-bb73-e54e7d1c5b5f" name="Default Changelist" comment="" />
+      <created>1603487232549</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1603487232549</updated>
+    </task>
+    <task id="LOCAL-00001" summary="V1.7 Sorted some things. Algorithm has improved">
+      <created>1603656764072</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1603656764073</updated>
+    </task>
+    <task id="LOCAL-00002" summary="V1.8 Algorithm has improved !!!">
+      <created>1603691854448</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1603691854448</updated>
+    </task>
+    <task id="LOCAL-00003" summary="V1. Algorithm workout with cos">
+      <created>1603718053580</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1603718053580</updated>
+    </task>
+    <task id="LOCAL-00004" summary="V1.9 Algorithm works !!!!!!!!! but not sphere">
+      <created>1603720695139</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1603720695139</updated>
+    </task>
+    <task id="LOCAL-00005" summary="V1.9.2 Algorithm works !!!!!!!!! but not sphere">
+      <created>1603721530932</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1603721530932</updated>
+    </task>
+    <task id="LOCAL-00006" summary="V2.0 Algorithm works !!!!!!!!! but not sphere now compatible with arduino">
+      <created>1610201321364</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1610201321364</updated>
+    </task>
+    <task id="LOCAL-00007" summary="V2.1 Algorithm works !!!!!!!!! but not sphereno with brand new issues">
+      <created>1610904443789</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1610904443789</updated>
+    </task>
+    <task id="LOCAL-00008" summary="V2.3 Algorithm works !!!!!!!!! failure found not repaired">
+      <created>1611179442355</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1611179442356</updated>
+    </task>
+    <task id="LOCAL-00009" summary="V2.4 Algorithm works !!!!!!!!!">
+      <created>1611216811119</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1611216811119</updated>
+    </task>
+    <task id="LOCAL-00010" summary="V2.4.2 Algorithm works !!!!!!!!!">
+      <created>1611216905197</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1611216905197</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="V1.7 Sorted some things. Algorithm has improved" />
+    <MESSAGE value="V1.8 Algorithm has improved !!!" />
+    <MESSAGE value="V1. Algorithm workout with cos" />
+    <MESSAGE value="V1.9 Algorithm works !!!!!!!!! but not sphere" />
+    <MESSAGE value="V1.9.2 Algorithm works !!!!!!!!! but not sphere" />
+    <MESSAGE value="V2.0 Algorithm works !!!!!!!!! but not sphere now compatible with arduino" />
+    <MESSAGE value="V2.1 Algorithm works !!!!!!!!! but not sphereno with brand new issues" />
+    <MESSAGE value="V2.3 Algorithm works !!!!!!!!! failure found not repaired" />
+    <MESSAGE value="V2.4 Algorithm works !!!!!!!!!" />
+    <MESSAGE value="V2.4.2 Algorithm works !!!!!!!!!" />
+    <option name="LAST_COMMIT_MESSAGE" value="V2.4.2 Algorithm works !!!!!!!!!" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="414" y="176" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1660565875959">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="414" y="176" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1660565875959" />
+    <state x="740" y="276" key="FileChooserDialogImpl" timestamp="1660565872565">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="276" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1660565872565" />
+    <state width="1899" height="266" key="GridCell.Tab.0.bottom" timestamp="1660569699073">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="266" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1660569699073" />
+    <state width="1899" height="266" key="GridCell.Tab.0.center" timestamp="1660569699072">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="266" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1660569699072" />
+    <state width="1899" height="266" key="GridCell.Tab.0.left" timestamp="1660569699072">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="266" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1660569699072" />
+    <state width="1899" height="266" key="GridCell.Tab.0.right" timestamp="1660569699072">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="266" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1660569699072" />
+    <state x="461" y="163" key="SettingsEditor" timestamp="1660567382714">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="461" y="163" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1660567382714" />
+    <state x="656" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1662994548236">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="656" y="345" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1662994548236" />
+    <state x="564" y="361" key="search.everywhere.popup" timestamp="1662994582058">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="564" y="361" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1662994582058" />
+  </component>
+</project>
