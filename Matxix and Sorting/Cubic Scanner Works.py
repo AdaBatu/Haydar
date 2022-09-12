@@ -34,7 +34,7 @@ def sayılr():
     ser = serial.Serial(port="COM4", baudrate=9600)
     time.sleep(4)
     ser.write(bab.encode('ascii'))
-    for p in range(axedif*2):
+    for p in range(axedif*2):  # 577-1=576
         b = ser.readline().decode('ascii')
         raw = b[:-2].strip()
         unraw = raw[2:]
